@@ -21,6 +21,12 @@
   with_items: "{{ _yum }}"
   tags: locales
 
+- name: locale-gen
+  locale_gen:
+    name: "{{ locales_lang }}"
+    state: present
+  tags: locales
+
 - name: update /etc/sysconfig/i18n
   lineinfile:
     path: "{{ item.path }}"

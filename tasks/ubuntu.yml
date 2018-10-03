@@ -27,6 +27,12 @@
   with_items: "{{ _apt }}"
   tags: locales
 
+- name: locale-gen
+  locale_gen:
+    name: "{{ locales_lang }}"
+    state: present
+  tags: locales
+
 - name: update-locale
   shell: |
     update-locale LC_ALL={{ locales_lc_all }} LANG={{ locales_lang }}
