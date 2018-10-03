@@ -21,6 +21,13 @@
   with_items: "{{ _yum }}"
   tags: locales
 
+- name: remove override_install_langs
+  lineinfile:
+    path: "/etc/yum.conf"
+    regexp: "^override_install_langs="
+    state: absent
+  tags: locales
+
 - name: yum reinstall glibc-common
   shell: |
     yum -y reinstall glibc-common
