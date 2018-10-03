@@ -21,6 +21,13 @@
   with_items: "{{ _yum }}"
   tags: locales
 
+- name: yum reinstall glibc-common
+  shell: |
+    yum -y reinstall glibc-common
+  register: yum_reinstall_result
+  changed_when: yum_reinstall_result.rc != 0
+  tags: locales
+
 - name: locale-gen
   locale_gen:
     name: "{{ locales_lang }}"
