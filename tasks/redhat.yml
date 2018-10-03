@@ -28,12 +28,6 @@
   changed_when: yum_reinstall_result.rc != 0
   tags: locales
 
-- name: locale-gen
-  locale_gen:
-    name: "{{ locales_lang }}"
-    state: present
-  tags: locales
-
 - name: localectl set-locale
   shell: |
     localectl set-locale LC_ALL={{ locales_lc_all }} LANG={{ locales_lang }}
