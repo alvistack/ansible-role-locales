@@ -42,5 +42,4 @@
     line: "{{ item.line }}"
   with_items:
     - { path: "/etc/sysconfig/i18n", regexp: "^LANG=", line: "LANG={{ locales_lang }}" }
-    - { path: "/etc/sysconfig/i18n", regexp: "^LC_ALL=", line: "LC_ALL={{ locales_lc_all }}" }
   tags: locales

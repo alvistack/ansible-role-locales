@@ -15,4 +15,3 @@
 # limitations under the License.
 
 locales_lang: "en_US.UTF-8"
-locales_lc_all: "{{ locales_lang }}"

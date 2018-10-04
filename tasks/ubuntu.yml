@@ -36,7 +36,7 @@
 
 - name: update-locale
   shell: |
-    update-locale LC_ALL={{ locales_lc_all }} LANG={{ locales_lang }}
+    update-locale LANG={{ locales_lang }}
   register: update_locale_result
   changed_when: update_locale_result.rc != 0
   tags: locales

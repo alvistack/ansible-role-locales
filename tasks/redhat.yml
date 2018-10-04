@@ -37,7 +37,7 @@
 
 - name: localectl set-locale
   shell: |
-    localectl set-locale LC_ALL={{ locales_lc_all }} LANG={{ locales_lang }}
+    localectl set-locale LANG={{ locales_lang }}
   register: localectl_set_locale_result
   changed_when: localectl_set_locale_result.rc != 0
   tags: locales
