@@ -40,3 +40,13 @@
   register: update_locale_result
   changed_when: update_locale_result.rc != 0
   tags: locales
+
+- name: update /etc/environment
+  lineinfile:
+    path: "/etc/environment"
+    regexp: "^LANG="
+    line: "LANG=\"{{ locales_lang }}\""
+    insertafter: "EOF"
+    state: "present"
+    create: "yes"
+  tags: locales
