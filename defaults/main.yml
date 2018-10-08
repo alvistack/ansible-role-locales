@@ -14,4 +14,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Provides default value for LC_* variables that have not been explicitly set.
 locales_lang: "en_US.UTF-8"
