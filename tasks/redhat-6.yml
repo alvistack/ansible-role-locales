@@ -40,16 +40,21 @@
     path: "{{ item.path }}"
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
+    insertafter: "EOF"
+    state: "present"
+    create: "yes"
   with_items:
     - { path: "/etc/sysconfig/i18n", regexp: "^LANG=", line: "LANG={{ locales_lang }}" }
   tags: locales
 
 - name: update /etc/environment
   lineinfile:
-    path: "/etc/environment"
-    regexp: "^LANG="
-    line: "LANG=\"{{ locales_lang }}\""
+    path: "{{ item.path }}"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
     insertafter: "EOF"
     state: "present"
     create: "yes"
+  with_items:
+    - { path: "/etc/environment", regexp: "^LANG=", line: "LANG={{ locales_lang }}" }
   tags: locales
