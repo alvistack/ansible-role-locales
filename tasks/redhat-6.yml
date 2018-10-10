@@ -37,7 +37,7 @@
   changed_when: yum_reinstall_result.rc != 0
   tags: locales
 
-- name: update /etc/sysconfig/i18n and /etc/profile.d/lang.sh
+- name: update /etc/sysconfig/i18n
   lineinfile:
     path: "{{ item.path }}"
     regexp: "{{ item.regexp }}"
@@ -46,6 +46,5 @@
     state: "present"
     create: "yes"
   with_items:
-    - { path: "/etc/profile.d/lang.sh", regexp: "^export LANG=", line: "export LANG={{ locales_lang }}" }
     - { path: "/etc/sysconfig/i18n", regexp: "^LANG=", line: "LANG={{ locales_lang }}" }
   tags: locales
