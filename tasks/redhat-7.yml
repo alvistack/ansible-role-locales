@@ -39,9 +39,14 @@
   changed_when: yum_reinstall_result.rc != 0
   tags: locales
 
-- name: localectl set-locale
-  shell: |
-    localectl set-locale LANG={{ locales_lang }}
-  register: localectl_set_locale_result
-  changed_when: localectl_set_locale_result.rc != 0
+- name: update /etc/locale.conf
+  lineinfile:
+    path: "{{ item.path }}"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    insertafter: "EOF"
+    state: "present"
+    create: "yes"
+  with_items:
+    - { path: "/etc/locale.conf", regexp: "^LANG=", line: "LANG={{ locales_lang }}" }
   tags: locales
