@@ -32,6 +32,8 @@
 - name: yum reinstall glibc-common
   shell: |
     yum -y reinstall glibc-common
+  args:
+    warn: false
   when: remove_override_install_langs_result is changed
   register: yum_reinstall_result
   changed_when: yum_reinstall_result.rc != 0
