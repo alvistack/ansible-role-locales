@@ -32,8 +32,17 @@
 - hosts: all
   remote_user: root
   tasks:
-    - name: locale -a
+    - name: locale --all-locales
       shell: |
-        locale -a
+        locale --all-locales
+      register: locale_all_locales_result
+      changed_when: locale_all_locales_result.rc != 0
+
+    - name: su -l -s /bin/bash -c 'locale'
+      shell: |
+        su -l -s /bin/bash -c 'locale'
+      args:
+        warn: false
       register: locale_result
       changed_when: locale_result.rc != 0
+      failed_when: "'LANG=en_US.UTF-8' not in locale_result.stdout"

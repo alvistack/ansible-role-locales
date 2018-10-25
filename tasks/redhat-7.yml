@@ -26,18 +26,27 @@
     path: "/etc/yum.conf"
     regexp: "^override_install_langs="
     state: absent
+  register: remove_override_install_langs_result
   tags: locales
 
 - name: yum reinstall glibc-common
   shell: |
     yum -y reinstall glibc-common
+  args:
+    warn: false
+  when: remove_override_install_langs_result is changed
   register: yum_reinstall_result
   changed_when: yum_reinstall_result.rc != 0
   tags: locales
 
-- name: localectl set-locale
-  shell: |
-    localectl set-locale LANG={{ locales_lang }}
-  register: localectl_set_locale_result
-  changed_when: localectl_set_locale_result.rc != 0
+- name: update /etc/locale.conf
+  lineinfile:
+    path: "{{ item.path }}"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    insertafter: "EOF"
+    state: "present"
+    create: "yes"
+  with_items:
+    - { path: "/etc/locale.conf", regexp: "^LANG=", line: "LANG=\"{{ locales_lang }}\"" }
   tags: locales
