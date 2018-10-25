@@ -48,5 +48,5 @@
     state: "present"
     create: "yes"
   with_items:
-    - { path: "/etc/locale.conf", regexp: "^LANG=", line: "LANG={{ locales_lang }}" }
+    - { path: "/etc/locale.conf", regexp: "^LANG=", line: "LANG=\"{{ locales_lang }}\"" }
   tags: locales
