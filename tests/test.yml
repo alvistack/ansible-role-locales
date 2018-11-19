@@ -33,14 +33,14 @@
   remote_user: root
   tasks:
     - name: locale --all-locales
-      shell: |
-        locale --all-locales
+      command: locale --all-locales
       register: locale_all_locales_result
       changed_when: locale_all_locales_result.rc != 0
 
-    - name: su -l -s /bin/bash -c 'locale'
+    - name: locale
       shell: |
-        su -l -s /bin/bash -c 'locale'
+        . /etc/profile
+        locale
       args:
         warn: false
       register: locale_result
