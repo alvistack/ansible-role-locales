@@ -37,10 +37,9 @@
       register: locale_all_locales_result
       changed_when: locale_all_locales_result.rc != 0
 
-    - name: locale
+    - name: su -l -s /bin/bash -c 'locale'
       shell: |
-        . /etc/profile
-        locale
+        su -l -s /bin/bash -c 'locale'
       args:
         warn: false
       register: locale_result
