@@ -33,8 +33,7 @@
   remote_user: root
   tasks:
     - name: locale --all-locales
-      shell: |
-        locale --all-locales
+      command: locale --all-locales
       register: locale_all_locales_result
       changed_when: locale_all_locales_result.rc != 0
 

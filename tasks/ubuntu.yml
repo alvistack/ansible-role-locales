@@ -14,12 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: apt-get update
-  apt:
-    update_cache: "yes"
-  changed_when: false
-  tags: locales
-
 - name: apt-get install
   apt:
     name: "{{ item.name }}"
@@ -28,15 +22,13 @@
   tags: locales
 
 - name: locale-gen
-  shell: |
-    locale-gen {{ locales_lang }}
+  command: locale-gen {{ locales_lang }}
   register: locale_gen_result
   changed_when: locale_gen_result.rc != 0
   tags: locales
 
 - name: update-locale
-  shell: |
-    update-locale LANG={{ locales_lang }}
+  command: update-locale LANG={{ locales_lang }}
   register: update_locale_result
   changed_when: update_locale_result.rc != 0
   tags: locales
