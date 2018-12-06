@@ -19,16 +19,18 @@
     name: "{{ item.name }}"
     state: "{{ item.state }}"
   with_items: "{{ _apt }}"
+  register: result
+  until: result is succeeded
   tags: locales
 
 - name: locale-gen
   command: locale-gen {{ locales_lang }}
-  register: locale_gen_result
-  changed_when: locale_gen_result.rc != 0
+  register: result
+  changed_when: result is not succeeded
   tags: locales
 
 - name: update-locale
   command: update-locale LANG={{ locales_lang }}
-  register: update_locale_result
-  changed_when: update_locale_result.rc != 0
+  register: result
+  changed_when: result is not succeeded
   tags: locales
