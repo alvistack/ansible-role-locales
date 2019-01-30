@@ -47,7 +47,7 @@
     line: "{{ item.line }}"
     insertafter: "EOF"
     state: "present"
-    create: "yes"
+    create: true
   with_items:
     - { path: "/etc/sysconfig/i18n", regexp: "^LANG=", line: "LANG=\"{{ locales_lang }}\"" }
   tags: locales
