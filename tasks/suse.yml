@@ -14,35 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: yum install
-  yum:
+- name: zypper install
+  zypper:
     name: "{{ item.name }}"
     state: "{{ item.state }}"
-  with_items: "{{ _yum }}"
+  with_items: "{{ _zypper }}"
   register: result
   until: result is succeeded
   tags: locales
 
-- name: remove override_install_langs
-  lineinfile:
-    path: "/etc/yum.conf"
-    regexp: "^override_install_langs="
-    state: absent
-  register: remove_override_install_langs_result
-  tags: locales
-
-- name: yum reinstall glibc-common
-  shell: |
-    set -o pipefail
-    yum -y reinstall glibc-common
-  args:
-    executable: "/bin/bash"
-  when: remove_override_install_langs_result is changed
-  register: result
-  changed_when: result is not succeeded
-  tags: locales
-
-- name: update /etc/locale.conf
+- name: update /etc/sysconfig/language
   lineinfile:
     path: "{{ item.path }}"
     regexp: "{{ item.regexp }}"
@@ -51,5 +32,17 @@
     state: "present"
     create: true
   with_items:
-    - { path: "/etc/locale.conf", regexp: "^LANG=", line: "LANG=\"{{ locales_lang }}\"" }
+    - { path: "/etc/sysconfig/language", regexp: "^RC_LANG=", line: "RC_LANG=\"{{ locales_lang }}\"" }
+  tags: locales
+
+- name: update /etc/bash.bashrc.local
+  lineinfile:
+    path: "{{ item.path }}"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    insertafter: "EOF"
+    state: "present"
+    create: true
+  with_items:
+    - { path: "/etc/bash.bashrc.local", regexp: "^export LANG=", line: "export LANG=\"{{ locales_lang }}\"" }
   tags: locales

@@ -14,26 +14,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-galaxy_info:
-  role_name: locales
-  author: Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
-  description: Ansible Role for Locale Management
-  company: PantaRei Design
-  license: Apache License 2.0
-  min_ansible_version: 2.6
-  platforms:
-    - name: Ubuntu
-      versions:
-        - xenial
-        - bionic
-    - name: EL
-      versions:
-        - 6
-        - 7
-    - name: opensuse
-      versions:
-        - 42
-        - 15
-  galaxy_tags:
-    - system
-dependencies: []
+- hosts: all
+  remote_user: root
+  roles:
+    - role: locales
+
+- hosts: all
+  remote_user: root
+  tasks:
+    - name: locale --all-locales
+      command: locale --all-locales
+      register: result
+      changed_when: result is not succeeded
+
+    - name: su -l -s /bin/bash -c 'locale'
+      command: su -l -s /bin/bash -c 'locale'
+      args:
+        warn: false
+      register: result
+      changed_when: result is not succeeded
+      failed_when: "'LANG=en_US.UTF-8' not in result.stdout"
