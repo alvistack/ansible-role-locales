@@ -16,11 +16,13 @@
 
 - hosts: all
   remote_user: root
+  become: true
   roles:
     - role: locales
 
 - hosts: all
   remote_user: root
+  become: true
   tasks:
     - name: locale --all-locales
       command: locale --all-locales
