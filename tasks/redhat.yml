@@ -18,7 +18,7 @@
   yum:
     name: "{{ item.name }}"
     state: "{{ item.state }}"
-  with_items: "{{ _yum }}"
+  loop: "{{ _yum }}"
   register: result
   until: result is succeeded
   tags: locales
@@ -50,6 +50,6 @@
     insertafter: "EOF"
     state: "present"
     create: true
-  with_items:
+  loop:
     - { path: "/etc/locale.conf", regexp: "^LANG=", line: "LANG=\"{{ locales_lang }}\"" }
   tags: locales
