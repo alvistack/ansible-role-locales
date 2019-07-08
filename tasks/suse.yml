@@ -18,7 +18,7 @@
   zypper:
     name: "{{ item.name }}"
     state: "{{ item.state }}"
-  with_items: "{{ _zypper }}"
+  loop: "{{ _zypper }}"
   register: result
   until: result is succeeded
   tags: locales
@@ -31,7 +31,7 @@
     insertafter: "EOF"
     state: "present"
     create: true
-  with_items:
+  loop:
     - { path: "/etc/sysconfig/language", regexp: "^RC_LANG=", line: "RC_LANG=\"{{ locales_lang }}\"" }
   tags: locales
 
@@ -43,6 +43,6 @@
     insertafter: "EOF"
     state: "present"
     create: true
-  with_items:
+  loop:
     - { path: "/etc/bash.bashrc.local", regexp: "^export LANG=", line: "export LANG=\"{{ locales_lang }}\"" }
   tags: locales
