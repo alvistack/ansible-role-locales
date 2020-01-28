@@ -53,3 +53,9 @@
   loop:
     - { path: "/etc/locale.conf", regexp: "^LANG=", line: "LANG=\"{{ locales_lang }}\"" }
   tags: locales
+
+- name: localectl set-locale
+  command: localectl set-locale LANG={{ locales_lang }}
+  register: result
+  changed_when: result is not succeeded
+  tags: locales

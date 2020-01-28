@@ -4,6 +4,9 @@
 
 ### Major Changes
 
+  - `localectl set-locale` for CentOS/RHEL 7
+  - `localectl set-locale` for openSUSE Leap 15.1
+
 ## 4.1.0 - 2020-01-16
 
 ### Major Changes
