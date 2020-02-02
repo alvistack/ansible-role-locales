@@ -49,6 +49,6 @@
 
 - name: localectl set-locale
   command: localectl set-locale LANG={{ locales_lang }}
-  register: result
-  changed_when: result is not succeeded
+  changed_when: false
+  ignore_errors: true
   tags: locales
