@@ -6,6 +6,7 @@
 
   - Add `default` scenario with Docker on Ubuntu 18.04
   - Always mount `/run/docker.sock` from host
+  - Always pass environment variable `container=docker` for systemd
   - `localectl set-locale` for CentOS/RHEL 7
   - `localectl set-locale` for openSUSE Leap 15.1
 
