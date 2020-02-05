@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Add `default` scenario with Docker on Ubuntu 18.04
   - `localectl set-locale` for CentOS/RHEL 7
   - `localectl set-locale` for openSUSE Leap 15.1
 
