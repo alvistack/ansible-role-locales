@@ -30,9 +30,11 @@
       changed_when: result is not succeeded
 
     - name: su -l -s /bin/bash -c 'locale'
-      command: su -l -s /bin/bash -c 'locale'
+      shell: |
+        set -o pipefail
+        su -l -s /bin/bash -c 'locale'
       args:
-        warn: false
+        executable: "/bin/bash"
       register: result
       changed_when: result is not succeeded
       failed_when: "'LANG=en_US.UTF-8' not in result.stdout"
