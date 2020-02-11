@@ -32,7 +32,11 @@
   tags: locales
 
 - name: yum reinstall -y glibc-common
-  command: yum reinstall -y glibc-common
+  shell: |
+    set -o pipefail
+    yum reinstall -y glibc-common
+  args:
+    executable: "/bin/bash"
   when: remove_override_install_langs_result is changed
   register: result
   changed_when: result is not succeeded
