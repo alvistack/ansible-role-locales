@@ -17,5 +17,18 @@
 - hosts: all
   remote_user: root
   become: true
-  roles:
-    - role: locales
+  tasks:
+    - name: locale --all-locales
+      command: locale --all-locales
+      register: result
+      changed_when: result is not succeeded
+
+    - name: su -l -s /bin/bash -c 'locale'
+      shell: |
+        set -o pipefail
+        su -l -s /bin/bash -c 'locale'
+      args:
+        executable: "/bin/bash"
+      register: result
+      changed_when: result is not succeeded
+      failed_when: "'LANG=en_US.UTF-8' not in result.stdout"
