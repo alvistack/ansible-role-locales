@@ -4,7 +4,8 @@
 
 ### Major Changes
 
-  - Migrate molecule tests to Libvirt
+  - Migrate molecule driver to Libvirt
+  - Migrate molecule verifier to Ansible
   - Support Ubuntu 19.10
   - `localectl set-locale` for CentOS/RHEL 7
   - `localectl set-locale` for openSUSE Leap 15.1
