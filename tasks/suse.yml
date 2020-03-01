@@ -27,26 +27,22 @@
 
 - name: update /etc/sysconfig/language
   lineinfile:
-    path: "{{ item.path }}"
-    regexp: "{{ item.regexp }}"
-    line: "{{ item.line }}"
+    path: "/etc/sysconfig/language"
+    regexp: "^RC_LANG="
+    line: "{RC_LANG=\"{{ locales_lang }}\""
     insertafter: "EOF"
     state: "present"
     create: true
-  loop:
-    - { path: "/etc/sysconfig/language", regexp: "^RC_LANG=", line: "RC_LANG=\"{{ locales_lang }}\"" }
   tags: locales
 
 - name: update /etc/bash.bashrc.local
   lineinfile:
-    path: "{{ item.path }}"
-    regexp: "{{ item.regexp }}"
-    line: "{{ item.line }}"
+    path: "/etc/bash.bashrc.local"
+    regexp: "^export LANG="
+    line: "export LANG=\"{{ locales_lang }}\""
     insertafter: "EOF"
     state: "present"
     create: true
-  loop:
-    - { path: "/etc/bash.bashrc.local", regexp: "^export LANG=", line: "export LANG=\"{{ locales_lang }}\"" }
   tags: locales
 
 - name: localectl set-locale

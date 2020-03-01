@@ -44,14 +44,12 @@
 
 - name: update /etc/locale.conf
   lineinfile:
-    path: "{{ item.path }}"
-    regexp: "{{ item.regexp }}"
-    line: "{{ item.line }}"
+    path: "/etc/locale.conf"
+    regexp: "^LANG="
+    line: "LANG=\"{{ locales_lang }}\""
     insertafter: "EOF"
     state: "present"
     create: true
-  loop:
-    - { path: "/etc/locale.conf", regexp: "^LANG=", line: "LANG=\"{{ locales_lang }}\"" }
   tags: locales
 
 - name: localectl set-locale
