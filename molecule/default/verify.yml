@@ -23,10 +23,11 @@
       register: result
       changed_when: result is not succeeded
 
-    - name: su -l -s /bin/bash -c 'locale'
+    - name: locale
       shell: |
         set -o pipefail
-        su -l -s /bin/bash -c 'locale'
+        source /etc/profile
+        locale
       args:
         executable: "/bin/bash"
       register: result
