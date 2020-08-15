@@ -27,6 +27,7 @@
   lineinfile:
     path: "/etc/yum.conf"
     regexp: "^override_install_langs="
+    mode: "0644"
     state: absent
   register: remove_override_install_langs_result
   tags: locales
@@ -48,8 +49,9 @@
     regexp: "^LANG="
     line: "LANG=\"{{ locales_lang }}\""
     insertafter: "EOF"
-    state: "present"
     create: true
+    mode: "0644"
+    state: "present"
   tags: locales
 
 - name: localectl set-locale

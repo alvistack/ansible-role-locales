@@ -31,8 +31,9 @@
     regexp: "^RC_LANG="
     line: "{RC_LANG=\"{{ locales_lang }}\""
     insertafter: "EOF"
-    state: "present"
     create: true
+    mode: "0644"
+    state: "present"
   tags: locales
 
 - name: update /etc/bash.bashrc.local
@@ -41,8 +42,9 @@
     regexp: "^export LANG="
     line: "export LANG=\"{{ locales_lang }}\""
     insertafter: "EOF"
-    state: "present"
     create: true
+    mode: "0644"
+    state: "present"
   tags: locales
 
 - name: localectl set-locale
