@@ -24,11 +24,12 @@
   tags: locales
 
 - name: remove override_install_langs
-  lineinfile:
+  ini_file:
     path: "/etc/yum.conf"
-    regexp: "^override_install_langs="
+    section: "main"
+    option: "override_install_langs"
     mode: "0644"
-    state: absent
+    state: "absent"
   register: remove_override_install_langs_result
   tags: locales
 
@@ -44,13 +45,13 @@
   tags: locales
 
 - name: update /etc/locale.conf
-  lineinfile:
+  ini_file:
     path: "/etc/locale.conf"
-    regexp: "^LANG="
-    line: "LANG=\"{{ locales_lang }}\""
-    insertafter: "EOF"
-    create: true
+    section: ""
+    option: "LANG"
+    value: "\"{{ locales_lang }}\""
     mode: "0644"
+    no_extra_spaces: true
     state: "present"
   tags: locales
 
