@@ -26,23 +26,25 @@
   tags: locales
 
 - name: update /etc/sysconfig/language
-  lineinfile:
+  ini_file:
     path: "/etc/sysconfig/language"
-    regexp: "^RC_LANG="
-    line: "{RC_LANG=\"{{ locales_lang }}\""
-    insertafter: "EOF"
+    section: ""
+    option: "RC_LANG"
+    value: "\"{{ locales_lang }}\""
+    mode: "0644"
+    no_extra_spaces: true
     state: "present"
-    create: true
   tags: locales
 
-- name: update /etc/bash.bashrc.local
-  lineinfile:
-    path: "/etc/bash.bashrc.local"
-    regexp: "^export LANG="
-    line: "export LANG=\"{{ locales_lang }}\""
-    insertafter: "EOF"
-    state: "present"
-    create: true
+- name: copy templates
+  template:
+    dest: "{{ item.dest }}"
+    src: "{{ item.src | default('./templates' + item.dest + '.j2') }}"
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.group | default('root') }}"
+    mode: "{{ item.mode | default('0644') }}"
+  loop:
+    - { dest: "/etc/bash.bashrc.local" }
   tags: locales
 
 - name: localectl set-locale
