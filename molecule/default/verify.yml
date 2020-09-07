@@ -32,4 +32,4 @@
         executable: "/bin/bash"
       register: result
       changed_when: result is not succeeded
-      failed_when: "'LANG=en_US.UTF-8' not in result.stdout"
+      failed_when: "'LANG=en_US.utf8' not in result.stdout"
