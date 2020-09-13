@@ -16,3 +16,4 @@
 
 _apt:
   - { state: "latest", name: "locales" }
+  - { state: "latest", name: "locales-all" }
