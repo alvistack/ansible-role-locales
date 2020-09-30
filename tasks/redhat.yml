@@ -21,7 +21,6 @@
   loop: "{{ _yum }}"
   register: result
   until: result is succeeded
-  tags: locales
 
 - name: remove override_install_langs
   ini_file:
@@ -31,7 +30,6 @@
     mode: "0644"
     state: "absent"
   register: remove_override_install_langs_result
-  tags: locales
 
 - name: yum reinstall -y glibc-common
   shell: |
@@ -42,7 +40,6 @@
   when: remove_override_install_langs_result is changed
   register: result
   changed_when: result is not succeeded
-  tags: locales
 
 - name: update /etc/locale.conf
   ini_file:
@@ -53,10 +50,8 @@
     mode: "0644"
     no_extra_spaces: true
     state: "present"
-  tags: locales
 
 - name: localectl set-locale
   command: localectl set-locale LANG={{ locales_lang }}
   changed_when: false
   ignore_errors: true
-  tags: locales

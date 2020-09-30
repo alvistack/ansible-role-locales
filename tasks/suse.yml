@@ -23,7 +23,6 @@
   loop: "{{ _zypper }}"
   register: result
   until: result is succeeded
-  tags: locales
 
 - name: update /etc/sysconfig/language
   ini_file:
@@ -34,7 +33,6 @@
     mode: "0644"
     no_extra_spaces: true
     state: "present"
-  tags: locales
 
 - name: copy templates
   template:
@@ -45,10 +43,8 @@
     mode: "{{ item.mode | default('0644') }}"
   loop:
     - { dest: "/etc/bash.bashrc.local" }
-  tags: locales
 
 - name: localectl set-locale
   command: localectl set-locale LANG={{ locales_lang }}
   changed_when: false
   ignore_errors: true
-  tags: locales
