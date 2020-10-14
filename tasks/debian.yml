@@ -21,16 +21,13 @@
   loop: "{{ _apt }}"
   register: result
   until: result is succeeded
-  tags: locales
 
 - name: locale-gen
   command: locale-gen {{ locales_lang }}
   register: result
   changed_when: result is not succeeded
-  tags: locales
 
 - name: update-locale
   command: update-locale LANG={{ locales_lang }}
   register: result
   changed_when: result is not succeeded
-  tags: locales
