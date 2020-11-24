@@ -1,6 +1,6 @@
 # Ansible Role for Locales
 
-[![Travis](https://img.shields.io/travis/com/alvistack/ansible-role-locales.svg)](https://travis-ci.com/alvistack/ansible-role-locales)
+[![Gitlab pipeline status](https://img.shields.io/gitlab/pipeline/alvistack/ansible-role-locales/master)](https://gitlab.com/alvistack/ansible-role-locales/-/pipelines)
 [![GitHub release](https://img.shields.io/github/release/alvistack/ansible-role-locales.svg)](https://github.com/alvistack/ansible-role-locales/releases)
 [![GitHub license](https://img.shields.io/github/license/alvistack/ansible-role-locales.svg)](https://github.com/alvistack/ansible-role-locales/blob/master/LICENSE)
 [![Ansible Role](https://img.shields.io/badge/galaxy-alvistack.locales-blue.svg)](https://galaxy.ansible.com/alvistack/locales)
