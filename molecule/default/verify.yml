@@ -25,7 +25,7 @@
 
     - name: locale
       shell: |
-        set -o pipefail
+        set -euo pipefail
         source /etc/profile
         locale
       args:
