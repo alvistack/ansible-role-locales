@@ -26,7 +26,6 @@
     - name: locale
       shell: |
         set -euo pipefail
-        source /etc/profile
         locale
       args:
         executable: "/bin/bash"
