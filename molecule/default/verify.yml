@@ -24,11 +24,7 @@
       changed_when: result is not succeeded
 
     - name: locale
-      shell: |
-        set -euo pipefail
-        locale
-      args:
-        executable: "/bin/bash"
+      command: locale
       register: result
       changed_when: result is not succeeded
       failed_when: "'LANG=en_US' not in result.stdout"
