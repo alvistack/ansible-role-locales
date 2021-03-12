@@ -29,17 +29,11 @@
     option: "override_install_langs"
     mode: "0644"
     state: "absent"
-  register: remove_override_install_langs_result
+  notify:
+    - locales | redhat | yum reinstall -y glibc-common
 
-- name: yum reinstall -y glibc-common
-  shell: |
-    set -euo pipefail
-    yum reinstall -y glibc-common
-  args:
-    executable: "/bin/bash"
-  when: remove_override_install_langs_result is changed
-  register: result
-  changed_when: result is not succeeded
+- name: flush handlers
+  meta: flush_handlers
 
 - name: update /etc/locale.conf
   ini_file:
