@@ -13,12 +13,3 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-- name: locales | redhat | yum reinstall -y glibc-common
-  shell: |
-    set -euo pipefail
-    yum reinstall -y glibc-common
-  args:
-    executable: "/bin/bash"
-  register: result
-  changed_when: result is not succeeded
