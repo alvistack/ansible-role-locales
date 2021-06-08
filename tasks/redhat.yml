@@ -32,7 +32,7 @@
 
 - name: yum reinstall -y glibc-common
   shell: |
-    set -euo pipefail
+    set -euxo pipefail
     yum reinstall -y glibc-common
   args:
     executable: "/bin/bash"
