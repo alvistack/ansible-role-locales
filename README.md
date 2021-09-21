@@ -1,5 +1,7 @@
 # Ansible Role for Locales
 
+<img src="/alvistack.svg" width="75" alt="AlviStack">
+
 [![Gitlab pipeline status](https://img.shields.io/gitlab/pipeline/alvistack/ansible-role-locales/master)](https://gitlab.com/alvistack/ansible-role-locales/-/pipelines)
 [![GitHub release](https://img.shields.io/github/release/alvistack/ansible-role-locales.svg)](https://github.com/alvistack/ansible-role-locales/releases)
 [![GitHub license](https://img.shields.io/github/license/alvistack/ansible-role-locales.svg)](https://github.com/alvistack/ansible-role-locales/blob/master/LICENSE)
