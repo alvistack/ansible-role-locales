@@ -19,12 +19,12 @@
   become: true
   tasks:
     - name: locale --all-locales
-      command: locale --all-locales
+      ansible.builtin.command: locale --all-locales
       register: result
       changed_when: result is not succeeded
 
     - name: locale
-      command: locale
+      ansible.builtin.command: locale
       register: result
       changed_when: result is not succeeded
       failed_when: "'LANG=en_US' not in result.stdout"

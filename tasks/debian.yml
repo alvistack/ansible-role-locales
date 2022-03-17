@@ -15,7 +15,7 @@
 # limitations under the License.
 
 - name: apt-get install
-  apt:
+  ansible.builtin.apt:
     name: "{{ item.name }}"
     state: "{{ item.state }}"
   loop: "{{ _apt }}"
@@ -23,11 +23,11 @@
   until: result is succeeded
 
 - name: locale-gen
-  command: locale-gen {{ locales_lang }}
+  ansible.builtin.command: locale-gen {{ locales_lang }}
   register: result
   changed_when: result is not succeeded
 
 - name: update-locale
-  command: update-locale LANG={{ locales_lang }}
+  ansible.builtin.command: update-locale LANG={{ locales_lang }}
   register: result
   changed_when: result is not succeeded
