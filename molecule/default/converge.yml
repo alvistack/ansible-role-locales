@@ -20,5 +20,5 @@
   tasks:
     - name: include role
       ansible.builtin.include_role:
-        name: locales
-      tags: locales
+        name: alvistack.locales
+      tags: alvistack.locales
