@@ -23,7 +23,7 @@
   until: result is succeeded
 
 - name: remove override_install_langs
-  ini_file:
+  community.general.ini_file:
     path: "/etc/yum.conf"
     section: "main"
     option: "override_install_langs"
@@ -40,7 +40,7 @@
   changed_when: result is not succeeded
 
 - name: update /etc/locale.conf
-  ini_file:
+  community.general.ini_file:
     path: "/etc/locale.conf"
     section: ""
     option: "LANG"
