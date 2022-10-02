@@ -50,6 +50,7 @@
     state: "present"
 
 - name: localectl set-locale
-  ansible.builtin.command: localectl set-locale LANG={{ locales_lang }}
+  ansible.builtin.command:
+    cmd: localectl set-locale LANG={{ locales_lang }}
   changed_when: false
   failed_when: false

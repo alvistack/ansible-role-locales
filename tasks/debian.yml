@@ -23,11 +23,13 @@
   until: result is succeeded
 
 - name: locale-gen
-  ansible.builtin.command: locale-gen {{ locales_lang }}
+  ansible.builtin.command:
+    cmd: locale-gen {{ locales_lang }}
   register: result
   changed_when: result is not succeeded
 
 - name: update-locale
-  ansible.builtin.command: update-locale LANG={{ locales_lang }}
+  ansible.builtin.command:
+    cmd: update-locale LANG={{ locales_lang }}
   register: result
   changed_when: result is not succeeded
