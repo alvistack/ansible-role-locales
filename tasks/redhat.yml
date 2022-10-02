@@ -31,9 +31,10 @@
     state: "absent"
 
 - name: yum reinstall -y glibc-common
-  ansible.builtin.shell: |
-    set -euxo pipefail
-    yum reinstall -y glibc-common
+  ansible.builtin.shell:
+    cmd: |
+      set -euxo pipefail
+      yum reinstall -y glibc-common
   args:
     executable: "/bin/bash"
   register: result
@@ -50,6 +51,7 @@
     state: "present"
 
 - name: localectl set-locale
-  ansible.builtin.command: localectl set-locale LANG={{ locales_lang }}
+  ansible.builtin.command:
+    cmd: localectl set-locale LANG={{ locales_lang }}
   changed_when: false
   failed_when: false
