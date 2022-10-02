@@ -31,9 +31,10 @@
     state: "absent"
 
 - name: yum reinstall -y glibc-common
-  ansible.builtin.shell: |
-    set -euxo pipefail
-    yum reinstall -y glibc-common
+  ansible.builtin.shell:
+    cmd: |
+      set -euxo pipefail
+      yum reinstall -y glibc-common
   args:
     executable: "/bin/bash"
   register: result
