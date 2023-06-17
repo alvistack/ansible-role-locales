@@ -14,6 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-_apt:
-  - { state: "latest", name: "language-pack-en" }
-  - { state: "latest", name: "locales" }
+_zypper:
+  - { state: "latest", name: "glibc-i18ndata" }
+  - { state: "latest", name: "glibc-locale" }
