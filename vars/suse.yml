@@ -15,5 +15,5 @@
 # limitations under the License.
 
 _zypper:
-  - { state: "latest", name: "glibc-i18ndata" }
-  - { state: "latest", name: "glibc-locale" }
+  - { state: latest, name: glibc-i18ndata }
+  - { state: latest, name: glibc-locale }

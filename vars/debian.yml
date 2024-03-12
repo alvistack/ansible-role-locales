@@ -15,5 +15,5 @@
 # limitations under the License.
 
 _apt:
-  - { state: "latest", name: "locales" }
-  - { state: "latest", name: "locales-all" }
+  - { state: latest, name: locales }
+  - { state: latest, name: locales-all }

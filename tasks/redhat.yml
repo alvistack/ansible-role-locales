@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2024 Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,11 +23,11 @@
 
 - name: remove override_install_langs
   community.general.ini_file:
-    path: "/etc/yum.conf"
-    section: "main"
-    option: "override_install_langs"
+    path: /etc/yum.conf
+    section: main
+    option: override_install_langs
     mode: "0644"
-    state: "absent"
+    state: absent
 
 - name: yum reinstall -y glibc-common
   ansible.builtin.shell:
@@ -36,19 +35,19 @@
       set -euxo pipefail
       yum reinstall -y glibc-common
   args:
-    executable: "/bin/bash"
+    executable: /bin/bash
   register: result
   changed_when: result is not succeeded
 
 - name: update /etc/locale.conf
   community.general.ini_file:
-    path: "/etc/locale.conf"
+    path: /etc/locale.conf
     section: ""
-    option: "LANG"
-    value: "\"{{ locales_lang }}\""
+    option: LANG
+    value: '"{{ locales_lang }}"'
     mode: "0644"
     no_extra_spaces: true
-    state: "present"
+    state: present
 
 - name: localectl set-locale
   ansible.builtin.command:

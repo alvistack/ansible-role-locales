@@ -15,6 +15,6 @@
 # limitations under the License.
 
 _yum:
-  - { state: "latest", name: "glibc-common" }
-  - { state: "latest", name: "glibc-langpack-en" }
-  - { state: "latest", name: "glibc-locale-source" }
+  - { state: latest, name: glibc-common }
+  - { state: latest, name: glibc-langpack-en }
+  - { state: latest, name: glibc-locale-source }
