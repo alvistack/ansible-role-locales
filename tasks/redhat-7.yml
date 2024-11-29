@@ -33,6 +33,7 @@
   ansible.builtin.shell:
     cmd: |
       set -euxo pipefail
+      yum install -y glibc-common
       yum reinstall -y glibc-common
   args:
     executable: /bin/bash
