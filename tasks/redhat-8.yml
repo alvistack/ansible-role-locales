@@ -13,11 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: dnf install
-  ansible.builtin.dnf:
+- name: yum install
+  ansible.builtin.yum: # noqa fqcn[action-core]
     name: "{{ item.name }}"
     state: "{{ item.state }}"
-  loop: "{{ _dnf }}"
+  loop: "{{ _yum }}"
   register: result
   until: result is succeeded
 
@@ -29,12 +29,12 @@
     mode: "0644"
     state: absent
 
-- name: dnf reinstall -y glibc-common
+- name: yum reinstall -y glibc-common
   ansible.builtin.shell:
     cmd: |
       set -euxo pipefail
-      dnf install -y glibc-common
-      dnf reinstall -y glibc-common
+      yum install -y glibc-common
+      yum reinstall -y glibc-common
   args:
     executable: /bin/bash
   register: result
