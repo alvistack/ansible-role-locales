@@ -23,6 +23,8 @@
   loop: "{{ _zypper }}"
   register: result
   until: result is succeeded
+  tags:
+    - _zypper
 
 - name: update /etc/sysconfig/language
   community.general.ini_file:

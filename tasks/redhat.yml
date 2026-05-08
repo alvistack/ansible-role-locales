@@ -20,6 +20,8 @@
   loop: "{{ _dnf }}"
   register: result
   until: result is succeeded
+  tags:
+    - _dnf
 
 - name: remove override_install_langs
   community.general.ini_file:
@@ -39,6 +41,8 @@
     executable: /bin/bash
   register: result
   changed_when: result is not succeeded
+  tags:
+    - _dnf
 
 - name: update /etc/locale.conf
   community.general.ini_file:
