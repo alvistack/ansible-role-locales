@@ -13,13 +13,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: yum install
+- name: dnf install
   ansible.builtin.dnf:
     name: "{{ item.name }}"
     state: "{{ item.state }}"
-  loop: "{{ _yum }}"
+  loop: "{{ _dnf }}"
   register: result
   until: result is succeeded
+  tags:
+    - _dnf
 
 - name: remove override_install_langs
   community.general.ini_file:
@@ -29,16 +31,18 @@
     mode: "0644"
     state: absent
 
-- name: yum reinstall -y glibc-common
+- name: dnf reinstall -y glibc-common
   ansible.builtin.shell:
     cmd: |
       set -euxo pipefail
-      yum install -y glibc-common
-      yum reinstall -y glibc-common
+      dnf install -y glibc-common
+      dnf reinstall -y glibc-common
   args:
     executable: /bin/bash
   register: result
   changed_when: result is not succeeded
+  tags:
+    - _dnf
 
 - name: update /etc/locale.conf
   community.general.ini_file:
